@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bharali Jokes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: aliceblue;
+        }
+
+        .container {
+            text-align: center;
+            width: 60vw;
+            height: auto;
+            background-color: rgba(188, 201, 201, 0.515);
+            border: 2px solid #000;
+            border-radius: 80px;
+            padding: 30px;
+            box-shadow: 0 0 4px #ef6565;
+        }
+
+        .container h1 {
+
+            font-size: 2rem;
+            margin-bottom: 40px;
+
+        }
+
+        .container p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .container button {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            background-color: rgb(239, 56, 117);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+
+        }
+
+        .container button:hover {
+            background-color: rgb(56, 86, 239);
+        }
+
+.ft{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #423f3f;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 1.4rem;
+
+}
+
+
+        /*MOBILE VIEW*/
+
+        @media (max-width: 767px) {
+
+            body {
+
+                width: 100%;
+                height: 100vh;
+
+            }
+
+            .container {
+                width: 80vw;
+                height: auto;
+                padding: 20px;
+                border-radius: 30px;
+                box-shadow: 2 2 4px #e962ba;
+            }
+
+            .container h1 {
+                font-size: 1.7rem;
+                margin-bottom: 20px;
+            }
+
+            .container p {
+                font-size: 1.3rem;
+                margin-bottom: 20px;
+
+
+            }
+
+            .container button {
+                padding: 10px 15px;
+                font-size: 1.1rem;
+            }
+            .ft{
+                font-size: 1.155rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Welcome To Probin's Jokes</h1>
+        <p id="addJoke">Here you can find some of the best jokes that will make you laugh.</p>
+        <button id="getJokeBtn">Generate Jokes</button>
+    </div>
+
+    <div class="ft">
+        <p>All rights are reserved to <span> &copy; Probin</span></p>
+    </div>
+
+    <script>
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const jokeText = document.getElementById('addJoke');
+            const getJokeBtn = document.getElementById('getJokeBtn');
+
+            // Event listener for button click
+            getJokeBtn.addEventListener('click', async function () {
+                try {
+                    const response = await fetch('jokes.json');
+                    const jokes = await response.json();
+
+                    // Generate a random number to select a random joke
+                    const randomIndex = Math.floor(Math.random() * jokes.length);
+                    console.log(randomIndex);
+                    const randomJoke = jokes[randomIndex];
+                    console.log(randomJoke);
+
+                    // Display the random joke
+                    jokeText.textContent = randomJoke.joke;
+                } catch (error) {
+                    jokeText.textContent = 'Failed to fetch joke. Please try again later.';
+                    console.error('Error fetching joke:', error);
+                }
+            });
+        });
+
+
+
+    </script>
+</body>
+
+</html>
